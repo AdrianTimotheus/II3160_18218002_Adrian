@@ -14,16 +14,18 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     const posts = await loadPostsCollection();
     await posts.insertOne({
-        text: req.body.text
-        // createdAt: new Date()
-    });
+        text: req.body.text,
+        createdAt: new Date()
+    }); 
     res.status(201).send();
 });
 
 //delete posts
 router.delete('/:id', async (req,res) =>{
     const posts = await loadPostsCollection();
-    await posts.deleteOne({_id: new mongoDB.ObjectID(req.params.id) });
+    await posts.deleteOne({
+        _id: new mongoDB.ObjectID(req.params.id) 
+     });
     res.status(200).send();     
 });
 
